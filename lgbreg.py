@@ -113,13 +113,15 @@ def train_model(
         n_jobs=-1,
     )
 
+    verbose_eval = 1  # この数字を1にすると学習時のスコア推移がコマンドライン表示される
     model.fit(
         X_train,
         y_train,
         eval_set=[(X_valid, y_valid)],
         eval_metric="rmse",
-        early_stopping_rounds=100,
-        verbose=False,
+        callbacks = [lgb.early_stopping(stopping_rounds=100, 
+                    verbose=True), # early_stopping用コールバック関数
+                    lgb.log_evaluation(verbose_eval)],
     )
 
     valid_predictions = model.predict(X_valid)
