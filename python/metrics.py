@@ -10,7 +10,7 @@ class ParticipantVisibleError(Exception):
     pass
 
 
-def score(solution: pd.DataFrame, submission: pd.DataFrame, row_id_column_name: str, intermediate_res:list = None) -> float:
+def score(solution: pd.DataFrame, submission: pd.DataFrame, row_id_column_name: str, intermediate_res:list = []) -> float:
     """
     Calculates a custom evaluation metric (volatility-adjusted Sharpe ratio).
 
